@@ -9,9 +9,10 @@ const authRouter = require('./routes/auth');
 // INIT 
 const PORT = 3000;
 const app = express();
-const DB = "mongodb+srv://Rabin:Rabin123@cluster0.25tlh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+const DB = "mongodb+srv://Rabin:Rabin123@cluster0.p7tky.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
 //  middleware
+app.use(express.json());
 app.use(authRouter);
 
 // Connections to MongoDB
@@ -23,7 +24,7 @@ mongoose.connect(DB).then( () => {
 })
 
 // Server
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
     console.log(`Server is running on port ${PORT}`);
 })
 
