@@ -20,7 +20,7 @@ class AuthScreen extends StatefulWidget {
 class _AuthScreenState extends State<AuthScreen> {
   Auth _auth = Auth.signUp;
   final _signUpFormKey = GlobalKey<FormState>();
-  // final _signInFormKey = GlobalKey<FormState>();
+  final _signInFormKey = GlobalKey<FormState>();
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -41,6 +41,14 @@ class _AuthScreenState extends State<AuthScreen> {
       email: _emailController.text,
       password: _passwordController.text,
       name: _nameController.text,
+    );
+  }
+
+  void signInUser() {
+    authService.signInUser(
+      context: context,
+      email: _emailController.text,
+      password: _passwordController.text,
     );
   }
 
@@ -113,7 +121,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         CustomButton(
                           text: "Sign Up",
                           onTap: () {
-                            if(_signUpFormKey.currentState!.validate()){
+                            if (_signUpFormKey.currentState!.validate()) {
                               signUpUser();
                             }
                           },
@@ -122,6 +130,8 @@ class _AuthScreenState extends State<AuthScreen> {
                     ),
                   ),
                 ),
+
+// Sign
               ListTile(
                 tileColor: _auth == Auth.signIn
                     ? GlobalVariables.backgroundColor
@@ -147,7 +157,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   padding: EdgeInsets.all(8),
                   color: GlobalVariables.backgroundColor,
                   child: Form(
-                    key: _signUpFormKey,
+                    key: _signInFormKey,
                     child: Column(
                       children: [
                         CustomTextField(
@@ -166,7 +176,11 @@ class _AuthScreenState extends State<AuthScreen> {
                         ),
                         CustomButton(
                           text: "Sign In",
-                          onTap: () {},
+                          onTap: () {
+                            if (_signInFormKey.currentState!.validate()) {
+                              signInUser();
+                            }
+                          },
                         )
                       ],
                     ),
