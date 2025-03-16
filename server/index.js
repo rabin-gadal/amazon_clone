@@ -16,12 +16,12 @@ app.use(express.json());
 app.use(authRouter);
 
 // Connections to MongoDB
-mongoose.connect(DB).then( () => {
+mongoose.connect(DB).then(() => {
     console.log('Connection Successful');
 })
-.catch( (e) => {
-    console.log('Connection Failed');
-})
+    .catch((e) => {
+        console.log('Connection Failed');
+    })
 
 // Server
 app.listen(PORT, "0.0.0.0", () => {
